@@ -2,7 +2,7 @@
 <html lang="ko" translate="no">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self' https://djfeavsjnknxetighrlp.supabase.co wss://djfeavsjnknxetighrlp.supabase.co; object-src 'none'; base-uri 'none'; form-action 'self'; frame-src 'none'; worker-src 'self' blob:">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2/dist/umd/supabase.js https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self' https://djfeavsjnknxetighrlp.supabase.co wss://djfeavsjnknxetighrlp.supabase.co; object-src 'none'; base-uri 'none'; form-action 'self'; frame-src 'none'; worker-src 'self' blob:">
 <meta name="referrer" content="no-referrer">
 <script>/* 다른 사이트 안에 몰래 넣어 띄우는 것(클릭재킹) 막기 */if (window.top !== window.self) { document.documentElement.style.display = "none"; try { window.top.location = window.self.location.href; } catch (e) {} }</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -244,7 +244,7 @@ td.amt{color:var(--primary);font-weight:600}
     <input class="inp" id="lgPw" name="password" type="password" placeholder="비밀번호" autocomplete="current-password">
     <button class="btn primary always" id="lgBtn" type="submit" style="height:44px;width:100%;font-size:15px">로그인</button>
     <div id="lgErr" class="lgerr"></div>
-    <div class="madeby">by 혜마켓 혜랑이<br><a class="pvlink" href="./privacy.html" target="_blank" rel="noopener">개인정보 처리 안내</a></div>
+    <div class="madeby">by 혜마켓 혜랑이</div>
   </form>
 </section>
 
@@ -362,7 +362,7 @@ td.amt{color:var(--primary);font-weight:600}
   </section>
   <section class="card pad chart" id="chartPanel"></section>
 </main>
-<footer class="madeby">by 혜마켓 혜랑이<br><a class="pvlink" href="./privacy.html" target="_blank" rel="noopener">개인정보 처리 안내</a></footer>
+<footer class="madeby">by 혜마켓 혜랑이</footer>
 </div>
 
 <div id="toasts"></div>

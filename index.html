@@ -1708,8 +1708,7 @@ let started = false;
 const authPw = (pw) => (String(pw).length < 6 ? `lo-${pw}-pin` : String(pw));
 /* ───────── 보안 강화 (업체 오더) ─────────
    · 로그인 5번 틀리면 30초 잠금, 더 틀리면 2배씩 늘어나요 (최대 15분)
-   · 비밀번호를 아직 8자 이상으로 바꾸지 않은 계정은 위쪽에 안내 띠가 보여요
-   · 12시간 동안 쓰지 않으면 자동으로 로그아웃돼요 (공용 태블릿 보호) */
+   · 비밀번호를 아직 8자 이상으로 바꾸지 않은 계정은 위쪽에 안내 띠가 보여요 */
 const IDLE_MS = 12 * 60 * 60 * 1000;
 const FAIL_KEY = "lo-login-fail", ACT_KEY = "lo-last-active";
 function failState() { const f = lsGet(FAIL_KEY, null); return f && typeof f === "object" ? f : { n: 0, until: 0 }; }
@@ -1854,11 +1853,9 @@ async function boot() {
     finally { $("#lgBtn").disabled = false; }
   });
   sb.auth.onAuthStateChange((ev) => { if (ev === "SIGNED_OUT" && started) location.reload(); });
-  watchIdle();
   const { data } = await sb.auth.getSession();
-  if (data && data.session && idleExpired()) { await sb.auth.signOut(); showLogin("12시간 동안 쓰지 않아서 안전을 위해 로그아웃했어요. 다시 로그인해 주세요."); return; }
   if (data && data.session) startApp(data.session);
-  else showLogin(Number(lsGet("lo-idle-out", 0)) ? "12시간 동안 쓰지 않아서 안전을 위해 로그아웃했어요. 다시 로그인해 주세요." : "");
+  else showLogin();
 }
 boot();
 })();

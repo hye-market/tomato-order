@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko" translate="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google" content="notranslate">
+<title>개인정보 처리 안내 · 토마토 오더</title>
+<style>
+  :root { --ink:#1f1d1a; --muted:#6b665e; --line:#e7e2d9; --bg:#faf8f4; --card:#fff; --accent:#b8862b; }
+  @media (prefers-color-scheme: dark) { :root { --ink:#ece8e1; --muted:#a39d93; --line:#34302a; --bg:#151310; --card:#1d1a16; --accent:#d9a94a; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.7 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Malgun Gothic", sans-serif; word-break:keep-all; }
+  main { max-width:720px; margin:0 auto; padding:28px 18px 60px; }
+  h1 { font-size:21px; margin:0 0 4px; }
+  .sub { color:var(--muted); font-size:13px; margin:0 0 18px; }
+  .lead { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px 16px; margin-bottom:6px; }
+  section { margin:24px 0; }
+  h2 { font-size:16px; margin:0 0 8px; padding-top:6px; border-top:1px solid var(--line); }
+  table { width:100%; border-collapse:collapse; font-size:13.5px; margin:8px 0; background:var(--card); }
+  th, td { border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top; }
+  th { background:rgba(184,134,43,.08); font-weight:600; white-space:nowrap; }
+  ul { padding-left:20px; margin:6px 0; }
+  .muted { color:var(--muted); font-size:13px; }
+  a { color:var(--accent); }
+  footer { margin-top:34px; padding-top:14px; border-top:1px solid var(--line); color:var(--muted); font-size:12.5px; text-align:center; }
+</style>
+</head>
+<body>
+<main>
+  <h1>개인정보 처리 안내</h1>
+  <p class="sub">토마토 오더 · 시행일 2026년 11월 26일</p>
+
+  <div class="lead">
+    이 프로그램은 <b>토마토</b>가 라이브 방송 주문을 관리하려고 쓰는 <b>관리자 전용 프로그램</b>입니다.
+    손님의 개인정보를 모으고 책임지는 곳은 <b>토마토</b>이고, 혜마켓은 토마토의 위탁을 받아 이 프로그램을 만들고 운영합니다(수탁자).
+  </div>
+
+  <section>
+    <h2>1. 누가 무엇을 하나요</h2>
+    <table>
+      <tr><th>개인정보처리자 (위탁자)</th><td>토마토 — 손님 주문을 받고 배송·입금을 확인합니다. 열람·정정·삭제 요청은 토마토에 해 주세요.</td></tr>
+      <tr><th>수탁자</th><td>혜마켓(대표 김혜연) — 주문 관리 프로그램 제공·운영·유지보수</td></tr>
+      <tr><th>재수탁자</th><td>Supabase, Inc.(미국) — 주문 데이터 저장 (저장 위치: 대한민국 서울)<br>GitHub, Inc.(미국) — 프로그램 화면 파일 제공 (손님 정보는 저장하지 않음)</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>2. 처리하는 정보와 목적</h2>
+    <ul>
+      <li><b>항목:</b> 손님 이름(닉네임), 휴대전화번호, 배송 주소, 주문·입금 내역, 토마토가 적은 고객 메모</li>
+      <li><b>목적:</b> 주문 접수와 배송, 입금 확인, 미입금·주문내역 안내, 교환·반품·분쟁 처리</li>
+      <li><b>수집 방법:</b> 라이브 방송 댓글·카카오톡 등으로 손님이 알려 주신 내용을 토마토가 직접 입력합니다.</li>
+      <li><b>보유 기간:</b> 토마토의 개인정보처리방침에 따르며, 전자상거래법상 거래 기록은 5년, 분쟁 기록은 3년 보관합니다.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>3. 국외 이전</h2>
+    <p>데이터는 Supabase, Inc.(미국 회사, privacy@supabase.io)의 <b>서울 리전 서버</b>에 저장됩니다. 회사가 미국에 있어 운영·장애 대응 중 해외에서 접근할 수 있으므로 알려드립니다. 항목은 2번과 같고, 입력할 때마다 암호화 통신(HTTPS)으로 전송되며, 보유 기간도 2번과 같습니다.</p>
+  </section>
+
+  <section>
+    <h2>4. 안전하게 지키는 방법</h2>
+    <ul>
+      <li>토마토 관리자만 로그인해서 쓸 수 있고, 업체마다 데이터베이스가 완전히 따로 있어 다른 업체가 볼 수 없습니다.</li>
+      <li>모든 통신은 HTTPS로 암호화하고, 프로그램 코드에는 비밀키나 비밀번호를 넣지 않습니다.</li>
+      <li>혜마켓은 장애 대응이나 토마토의 요청이 있을 때만 데이터에 접근하고, 손님 정보를 다른 목적으로 쓰거나 다른 곳에 주지 않습니다.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>5. 문의</h2>
+    <ul>
+      <li><b>내 정보 열람·정정·삭제:</b> 주문하신 토마토에 직접 요청해 주세요.</li>
+      <li><b>프로그램 운영 관련:</b> 혜마켓 · 010-3952-9040 · <a href="mailto:hye-market@naver.com">hye-market@naver.com</a></li>
+      <li><b>침해 신고·상담:</b> 개인정보분쟁조정위원회 1833-6972, 개인정보침해신고센터 118</li>
+    </ul>
+  </section>
+
+  <footer><b>by 혜마켓 혜랑이</b></footer>
+</main>
+</body>
+</html>

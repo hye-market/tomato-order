@@ -2,6 +2,9 @@
 <html lang="ko" translate="no">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self' https://djfeavsjnknxetighrlp.supabase.co wss://djfeavsjnknxetighrlp.supabase.co; object-src 'none'; base-uri 'none'; form-action 'self'; frame-src 'none'; worker-src 'self' blob:">
+<meta name="referrer" content="no-referrer">
+<script>/* 다른 사이트 안에 몰래 넣어 띄우는 것(클릭재킹) 막기 */if (window.top !== window.self) { document.documentElement.style.display = "none"; try { window.top.location = window.self.location.href; } catch (e) {} }</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="google" content="notranslate">
 <title>토마토 오더</title>
@@ -10,8 +13,8 @@
 <meta name="apple-mobile-web-app-title" content="라이브오더">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2/dist/umd/supabase.js" integrity="sha384-A97u3Qnt9GZHURO9YJZRe7VQgGUeFzcv6I1oIGnUTxQrCxnpQMwR0/G8F2zt9abZ" crossorigin="anonymous"></script>
 <script>
 /* ══════════════════ 설정 (여기만 바꾸면 돼요) ══════════════════
    1) title        : 로그인 화면에 보일 업체 이름
@@ -188,6 +191,9 @@ td.amt{color:var(--primary);font-weight:600}
 .lglogo{width:44px;height:44px;color:var(--primary);margin:0 auto}
 .lgcard .inp{height:46px;font-size:16px}
 .madeby{text-align:center;font-weight:700;color:inherit;font-size:13px;padding:14px 0 18px;letter-spacing:-.2px}
+.pvlink{display:inline-block;margin-top:6px;font-size:11.5px;font-weight:400;color:var(--muted);text-decoration:underline}
+.pwwarn{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:10px auto 0;max-width:1200px;padding:10px 14px;border-radius:12px;border:1px solid color-mix(in srgb,var(--danger) 45%,transparent);background:color-mix(in srgb,var(--danger) 10%,transparent);font-size:13px}
+.pwwarn b{color:var(--danger)}
 .lgerr{color:var(--danger);font-size:13px;min-height:18px;line-height:1.5}
 .linkbtn{background:none;border:none;padding:0;color:inherit;font:inherit;cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px}
 .linkbtn:hover{color:var(--primary)}
@@ -238,7 +244,7 @@ td.amt{color:var(--primary);font-weight:600}
     <input class="inp" id="lgPw" name="password" type="password" placeholder="비밀번호" autocomplete="current-password">
     <button class="btn primary always" id="lgBtn" type="submit" style="height:44px;width:100%;font-size:15px">로그인</button>
     <div id="lgErr" class="lgerr"></div>
-    <div class="madeby">by 혜마켓 혜랑이</div>
+    <div class="madeby">by 혜마켓 혜랑이<br><a class="pvlink" href="./privacy.html" target="_blank" rel="noopener">개인정보 처리 안내</a></div>
   </form>
 </section>
 
@@ -260,6 +266,7 @@ td.amt{color:var(--primary);font-weight:600}
       <button class="btn w desk-only" id="bReset" title="초기화"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M8 6V4h8v2m-9 0 1 14h8l1-14"/></svg><span class="lbl">초기화</span></button>
       <button class="btn mob-only" id="bMore" title="더보기"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></button>
       <button class="btn" id="bTheme" title="밝게/어둡게"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"/></svg></button>
+      <button class="btn desk-only" id="bPw" title="비밀번호 변경"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8" cy="15" r="4"/><path d="m10.8 12.2 8.7-8.7M16 7l3 3M14 9l2 2"/></svg></button>
       <button class="btn desk-only" id="bLogout" title="로그아웃"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg><span class="lbl">로그아웃</span></button>
       <button class="btn" id="bSettings" title="업체 설정"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg><span class="lbl">설정</span></button>
     </div>
@@ -355,7 +362,7 @@ td.amt{color:var(--primary);font-weight:600}
   </section>
   <section class="card pad chart" id="chartPanel"></section>
 </main>
-<footer class="madeby">by 혜마켓 혜랑이</footer>
+<footer class="madeby">by 혜마켓 혜랑이<br><a class="pvlink" href="./privacy.html" target="_blank" rel="noopener">개인정보 처리 안내</a></footer>
 </div>
 
 <div id="toasts"></div>
@@ -1585,13 +1592,14 @@ function bind() {
   $("#bCostImport").addEventListener("click", () => { if (!window.XLSX) { toast("엑셀 도구를 불러오지 못했어요", "err"); return; } pickFile(".xlsx,.xls,.csv", importCosts); });
   $("#bHelp").addEventListener("click", openHelp);
   $("#bLogout").addEventListener("click", logout);
+  $("#bPw").addEventListener("click", () => openPwChange());
   $("#loadRange").addEventListener("change", async (e) => { lsSet(RANGE_KEY, e.target.value); S.allLoaded = false; busy("주문 불러오는 중"); try { await loaders.orders(); } catch (err) { toast(errMsg(err), "err"); } finally { busy(null); render(); } });
   document.addEventListener("click", (e) => { if (e.target && e.target.id === "bLoadAll") ensureAllLoaded(); });
   $("#bBackup").addEventListener("click", openBackup);
   $("#fName").addEventListener("input", renderCustHint);
   $("#bTrash").addEventListener("click", openTrash);
   $("#bMore").addEventListener("click", () => {
-    const items = [["bBackup", "💾 백업", "오늘 백업 또는 전체 백업을 엑셀로 받기"], ["bImport", "📥 엑셀 불러오기", "예전 주문·누적 합계 옮기기"], ["bMonth", "🗓 월초기화", "이번 달 주문 정리 + 휴지통 비우기 (매출표·누적은 남음)"], ["bSales", "↺ 매출초기화", "매출 그래프 기록 지우기"], ["bReset", "🗑 초기화", "주문·매출표 모두 지우기 (누적 합계는 남음)"], ["bLogout", "🚪 로그아웃", S.loginId ? `${S.loginId} 계정에서 나가기` : "이 기기에서 나가기"]];
+    const items = [["bBackup", "💾 백업", "오늘 백업 또는 전체 백업을 엑셀로 받기"], ["bImport", "📥 엑셀 불러오기", "예전 주문·누적 합계 옮기기"], ["bMonth", "🗓 월초기화", "이번 달 주문 정리 + 휴지통 비우기 (매출표·누적은 남음)"], ["bSales", "↺ 매출초기화", "매출 그래프 기록 지우기"], ["bReset", "🗑 초기화", "주문·매출표 모두 지우기 (누적 합계는 남음)"], ["bPw", "🔑 비밀번호 변경", "8자 이상, 영문+숫자로 바꾸기"], ["bLogout", "🚪 로그아웃", S.loginId ? `${S.loginId} 계정에서 나가기` : "이 기기에서 나가기"]];
     modal({ title: "더보기", okText: "닫기", cancelText: null,
       bodyHTML: `<div style="display:flex;flex-direction:column;gap:8px">${items.map(([id, t, d]) => `<button type="button" class="btn" data-go="${id}" style="height:auto;padding:12px 14px;justify-content:flex-start;text-align:left;flex-direction:column;align-items:flex-start;gap:2px"><b class="always" style="display:block">${t}</b><span class="muted" style="font-size:12px;white-space:normal">${d}</span></button>`).join("")}</div>`,
       onMount: (r) => r.querySelector(".modal").addEventListener("click", (e) => { const b = e.target.closest("[data-go]"); if (!b) return; const id = b.dataset.go; r.querySelector("#mOk").click(); setTimeout(() => $("#" + id).click(), 50); }) });
@@ -1698,6 +1706,92 @@ function afterFirstOrders() {
 }
 let started = false;
 const authPw = (pw) => (String(pw).length < 6 ? `lo-${pw}-pin` : String(pw));
+/* ───────── 보안 강화 (업체 오더) ─────────
+   · 로그인 5번 틀리면 30초 잠금, 더 틀리면 2배씩 늘어나요 (최대 15분)
+   · 비밀번호를 아직 8자 이상으로 바꾸지 않은 계정은 위쪽에 안내 띠가 보여요
+   · 12시간 동안 쓰지 않으면 자동으로 로그아웃돼요 (공용 태블릿 보호) */
+const IDLE_MS = 12 * 60 * 60 * 1000;
+const FAIL_KEY = "lo-login-fail", ACT_KEY = "lo-last-active";
+function failState() { const f = lsGet(FAIL_KEY, null); return f && typeof f === "object" ? f : { n: 0, until: 0 }; }
+function lockLeft() { const f = failState(); return Math.max(0, Math.ceil(((f.until || 0) - Date.now()) / 1000)); }
+function noteFail() {
+  const f = failState(); f.n = (f.n || 0) + 1;
+  if (f.n >= 5) f.until = Date.now() + Math.min(15 * 60, 30 * Math.pow(2, f.n - 5)) * 1000;
+  lsSet(FAIL_KEY, f);
+}
+function clearFail() { lsSet(FAIL_KEY, { n: 0, until: 0 }); }
+const pwRuleMsg = (pw, id) => {
+  const p = String(pw || "");
+  if (p.length < 8) return "8자 이상으로 만들어 주세요.";
+  if (!/[A-Za-z]/.test(p) || !/[0-9]/.test(p)) return "영문과 숫자를 함께 넣어 주세요.";
+  if (/^(.)\1+$/.test(p)) return "같은 글자만 반복하면 안 돼요.";
+  if (id && p.toLowerCase().includes(String(id).toLowerCase())) return "아이디가 들어가지 않게 해 주세요.";
+  if (/^(?:12345678|password|qwerty)/i.test(p)) return "너무 흔한 비밀번호예요.";
+  return "";
+};
+function markActive(force) {
+  const last = Number(lsGet(ACT_KEY, 0)) || 0;
+  if (force || Date.now() - last > 60000) lsSet(ACT_KEY, Date.now());
+}
+function idleExpired() { const last = Number(lsGet(ACT_KEY, 0)) || 0; return last > 0 && Date.now() - last > IDLE_MS; }
+function watchIdle() {
+  ["pointerdown", "keydown", "touchstart"].forEach((ev) => document.addEventListener(ev, () => markActive(false), { passive: true }));
+  setInterval(async () => {
+    if (!started || !idleExpired()) return;
+    try { if (channel) await sb.removeChannel(channel); } catch {}
+    lsSet("lo-idle-out", 1); await sb.auth.signOut(); location.reload();
+  }, 5 * 60 * 1000);
+}
+async function showPwWarn(session) {
+  try {
+    const u = (session && session.user) || ((await sb.auth.getUser()).data || {}).user;
+    const done = u && u.user_metadata && u.user_metadata.pw_updated_at;
+    let el = $("#pwWarn");
+    if (done || sessionStorage.getItem("lo-pw-later")) { if (el) el.remove(); return; }
+    if (!el) {
+      el = document.createElement("div"); el.id = "pwWarn"; el.className = "pwwarn";
+      el.innerHTML = `<span>🔒 <b>비밀번호를 바꿔 주세요.</b> 지금 비밀번호는 짧아서 다른 사람이 맞힐 수 있어요. 8자 이상(영문+숫자)으로 바꾸면 이 안내가 사라져요.</span>
+        <span class="row" style="gap:6px;margin-left:auto"><button type="button" class="btn sm primary" id="pwNow"><span class="always" style="display:inline">🔑 지금 바꾸기</span></button><button type="button" class="btn sm" id="pwLater"><span class="always" style="display:inline">나중에</span></button></span>`;
+      document.querySelector("header").after(el);
+      el.querySelector("#pwNow").addEventListener("click", () => openPwChange());
+      el.querySelector("#pwLater").addEventListener("click", () => { sessionStorage.setItem("lo-pw-later", "1"); el.remove(); });
+    }
+  } catch (e) { console.warn(e); }
+}
+async function openPwChange() {
+  const body = `<p class="muted" style="font-size:12.5px;margin:0 0 10px">8자 이상, 영문과 숫자를 함께 넣어 주세요. 바꾼 뒤에는 다른 기기에서도 새 비밀번호로 로그인해요.</p>
+    <div class="field"><label>지금 비밀번호</label><input class="inp" id="pwCur" type="password" autocomplete="current-password"></div>
+    <div class="field" style="margin-top:8px"><label>새 비밀번호</label><input class="inp" id="pwNew" type="password" autocomplete="new-password"></div>
+    <div class="field" style="margin-top:8px"><label>새 비밀번호 한 번 더</label><input class="inp" id="pwNew2" type="password" autocomplete="new-password"></div>
+    <div id="pwErr" class="lgerr" style="margin-top:8px"></div>`;
+  const res = await modal({ title: "🔑 비밀번호 변경", bodyHTML: body, okText: "바꾸기",
+    onMount: (r) => setTimeout(() => { const i = r.querySelector("#pwCur"); i && i.focus(); }, 30),
+    validate: () => {
+      const cur = $("#pwCur").value, n1 = $("#pwNew").value, n2 = $("#pwNew2").value, err = $("#pwErr");
+      if (!cur) { err.textContent = "지금 비밀번호를 넣어 주세요."; return false; }
+      const msg = pwRuleMsg(n1, S.loginId); if (msg) { err.textContent = msg; return false; }
+      if (n1 !== n2) { err.textContent = "새 비밀번호 두 칸이 서로 달라요."; return false; }
+      if (n1 === cur) { err.textContent = "지금과 다른 비밀번호로 만들어 주세요."; return false; }
+      return { cur, n1 };
+    } });
+  if (!res) return;
+  busy("비밀번호 바꾸는 중");
+  try {
+    const { data: ud } = await sb.auth.getUser(); const email = ud && ud.user && ud.user.email;
+    if (!email) throw new Error("로그인 정보를 찾지 못했어요");
+    const chk = await sb.auth.signInWithPassword({ email, password: authPw(res.cur) });
+    if (chk.error) { busy(null); toast("지금 비밀번호가 맞지 않아요", "err"); return; }
+    const { error } = await sb.auth.updateUser({ password: res.n1, data: { pw_updated_at: new Date().toISOString() } });
+    if (error) {
+      busy(null);
+      toast(/reauth/i.test(error.message) ? "보안 확인이 필요해요. 로그아웃 후 다시 로그인해서 바꿔 주세요." : /same/i.test(error.message) ? "지금과 다른 비밀번호로 만들어 주세요." : "비밀번호를 바꾸지 못했어요: " + error.message, "err", 5000);
+      return;
+    }
+    busy(null); const w = $("#pwWarn"); if (w) w.remove();
+    toast("비밀번호를 바꿨어요. 다음부터 새 비밀번호로 로그인해요 🔒", "ok", 4500);
+  } catch (e) { busy(null); console.error(e); toast(errMsg(e), "err"); }
+}
+
 const idToEmail = (id) => { const s = String(id).trim().toLowerCase(); return s.includes("@") ? s : `${s}@${CFG.loginDomain || "liveorder.local"}`; };
 function showLogin(msg = "") {
   $("#loading").classList.add("hide"); $("#app").classList.add("hide"); document.querySelector("header").classList.add("hide");
@@ -1716,6 +1810,7 @@ async function startApp(session) {
     await Promise.all(TABLES.map((t) => loaders[t]()));
   } catch (e) { console.error(e); started = false; showLogin("데이터를 불러오지 못했어요. 인터넷 연결을 확인하고 다시 로그인해 주세요."); return; }
   S.mode = "db"; afterFirstOrders(); render();
+  markActive(true); showPwWarn(session);
   // 30일 지난 휴지통 정리
   const old = S.trash.filter((t) => Date.now() - (t.deletedAt || 0) > TRASH_DAYS * 86400000);
   if (old.length) api.purgeTrash(old.map((t) => t.id)).catch(() => {});
@@ -1747,18 +1842,23 @@ async function boot() {
     e.preventDefault();
     const id = $("#lgId").value.trim(), pw = $("#lgPw").value;
     if (!id || !pw) { $("#lgErr").textContent = "아이디와 비밀번호를 입력해 주세요."; return; }
+    const left = lockLeft();
+    if (left > 0) { $("#lgErr").textContent = `로그인을 여러 번 틀려서 잠시 막아 두었어요. ${left}초 뒤에 다시 해 주세요.`; return; }
     $("#lgBtn").disabled = true; $("#lgErr").textContent = "";
     try {
       const { data, error } = await sb.auth.signInWithPassword({ email: idToEmail(id), password: authPw(pw) });
-      if (error) { $("#lgErr").textContent = /invalid/i.test(error.message) ? "아이디 또는 비밀번호가 맞지 않아요." : "로그인하지 못했어요. 잠시 후 다시 시도해 주세요."; return; }
-      $("#lgPw").value = "";
+      if (error) { if (/invalid/i.test(error.message)) noteFail(); $("#lgErr").textContent = /invalid/i.test(error.message) ? "아이디 또는 비밀번호가 맞지 않아요." : "로그인하지 못했어요. 잠시 후 다시 시도해 주세요."; return; }
+      $("#lgPw").value = ""; clearFail(); lsSet("lo-idle-out", 0); markActive(true);
       await startApp(data.session);
     } catch (err) { console.error(err); $("#lgErr").textContent = "인터넷 연결을 확인해 주세요."; }
     finally { $("#lgBtn").disabled = false; }
   });
   sb.auth.onAuthStateChange((ev) => { if (ev === "SIGNED_OUT" && started) location.reload(); });
+  watchIdle();
   const { data } = await sb.auth.getSession();
-  if (data && data.session) startApp(data.session); else showLogin();
+  if (data && data.session && idleExpired()) { await sb.auth.signOut(); showLogin("12시간 동안 쓰지 않아서 안전을 위해 로그아웃했어요. 다시 로그인해 주세요."); return; }
+  if (data && data.session) startApp(data.session);
+  else showLogin(Number(lsGet("lo-idle-out", 0)) ? "12시간 동안 쓰지 않아서 안전을 위해 로그아웃했어요. 다시 로그인해 주세요." : "");
 }
 boot();
 })();
